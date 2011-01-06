@@ -34,6 +34,7 @@ public interface Repository<T extends Entity<T>> {
 	
 	/**
 	 * このリポジトリに格納されているすべてのエンティティをListで取得する。
+	 * <p>エンティティが大量にある場合は、処理がブロックする可能性がある。</p>
 	 *
 	 * @return すべてのエンティティのList
 	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
@@ -42,6 +43,7 @@ public interface Repository<T extends Entity<T>> {
 	
 	/**
 	 * このリポジトリに格納されているすべてのエンティティをSetで取得する。
+	 * <p>エンティティが大量にある場合は、処理がブロックする可能性がある。</p>
 	 *
 	 * @return すべてのエンティティのSet
 	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
