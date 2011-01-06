@@ -18,6 +18,7 @@ package jp.tricreo.ddd.base.lifecycle;
 import java.util.List;
 import java.util.Set;
 
+import jp.tricreo.ddd.base.lifecycle.exception.EntityMultipleFoundRuntimeException;
 import jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException;
 import jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException;
 import jp.tricreo.ddd.base.model.Entity;
@@ -34,7 +35,6 @@ public interface Repository<T extends Entity<T>> {
 	
 	/**
 	 * このリポジトリに格納されているすべてのエンティティをListで取得する。
-	 * <p>エンティティが大量にある場合は、処理がブロックする可能性がある。</p>
 	 *
 	 * @return すべてのエンティティのList
 	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
@@ -43,7 +43,6 @@ public interface Repository<T extends Entity<T>> {
 	
 	/**
 	 * このリポジトリに格納されているすべてのエンティティをSetで取得する。
-	 * <p>エンティティが大量にある場合は、処理がブロックする可能性がある。</p>
 	 *
 	 * @return すべてのエンティティのSet
 	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
@@ -116,6 +115,7 @@ public interface Repository<T extends Entity<T>> {
 	 * @return エンティティ
 	 * @throws IllegalArgumentException       引数が不正な場合
 	 * @throws EntityNotFoundRuntimeException エンティティが見つからなかった場合
+	 * @throws EntityMultipleFoundRuntimeException 熟語に対して複数のエンティティが見つかった場合
 	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
 	T resolve(Predicate<T> predicate);

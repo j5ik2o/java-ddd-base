@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import jp.tricreo.ddd.base.lifecycle.Repository;
+import jp.tricreo.ddd.base.lifecycle.exception.EntityMultipleFoundRuntimeException;
 import jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException;
 import jp.tricreo.ddd.base.model.Entity;
 import jp.tricreo.ddd.base.model.EntityIdentifier;
@@ -117,12 +118,19 @@ public class OnMemoryRepository<T extends Entity<T>> implements Repository<T>, C
 	@Override
 	public T resolve(Predicate<T> predicate) {
 		Validate.notNull(predicate);
+		T result = null;
 		for (T entity : entities.values()) {
 			if (predicate.apply(entity)) {
-				return entity;
+				if (result != null) {
+					throw new EntityMultipleFoundRuntimeException();
+				}
+				result = entity;
 			}
 		}
-		throw new EntityNotFoundRuntimeException();
+		if (result == null) {
+			throw new EntityNotFoundRuntimeException();
+		}
+		return result;
 	}
 	
 	@Override
