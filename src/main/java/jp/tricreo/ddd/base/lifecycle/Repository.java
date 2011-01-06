@@ -18,6 +18,8 @@ package jp.tricreo.ddd.base.lifecycle;
 import java.util.List;
 import java.util.Set;
 
+import jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException;
+import jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException;
 import jp.tricreo.ddd.base.model.Entity;
 import jp.tricreo.ddd.base.model.EntityIdentifier;
 
@@ -34,7 +36,7 @@ public interface Repository<T extends Entity<T>> {
 	 * このリポジトリに格納されているすべてのエンティティをListで取得する。
 	 *
 	 * @return すべてのエンティティのList
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException リポジトリにアクセスできない場合
+	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
 	 */
 	List<T> asEntitiesList();
 	
@@ -42,7 +44,7 @@ public interface Repository<T extends Entity<T>> {
 	 * このリポジトリに格納されているすべてのエンティティをSetで取得する。
 	 *
 	 * @return すべてのエンティティのSet
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException リポジトリにアクセスできない場合
+	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
 	 */
 	Set<T> asEntitiesSet();
 	
@@ -51,7 +53,7 @@ public interface Repository<T extends Entity<T>> {
 	 *
 	 * @param identifier 識別子
 	 * @return 存在する場合はtrue
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException リポジトリにアクセスできない場合
+	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
 	 */
 	boolean contains(EntityIdentifier<T> identifier);
 	
@@ -61,7 +63,7 @@ public interface Repository<T extends Entity<T>> {
 	 *
 	 * @param predicate エンティティ
 	 * @return 存在する場合はtrue
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException リポジトリにアクセスできない場合
+	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
 	 */
 	boolean contains(Predicate<T> predicate);
 	
@@ -78,8 +80,8 @@ public interface Repository<T extends Entity<T>> {
 	 * 指定した識別子のエンティティを削除する。
 	 *
 	 * @param identifier 識別子
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException 指定された識別子を持つエンティティが見つからなかった場合
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException     リポジトリにアクセスできない場合
+	 * @throws EntityNotFoundRuntimeException 指定された識別子を持つエンティティが見つからなかった場合
+	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
 	void delete(EntityIdentifier<T> identifier);
 	
@@ -87,8 +89,8 @@ public interface Repository<T extends Entity<T>> {
 	 * 指定したエンティティを削除する。
 	 *
 	 * @param entity エンティティ
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException 指定された識別子を持つエンティティが見つからなかった場合
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException     リポジトリにアクセスできない場合
+	 * @throws EntityNotFoundRuntimeException 指定された識別子を持つエンティティが見つからなかった場合
+	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
 	void delete(T entity);
 	
@@ -97,9 +99,9 @@ public interface Repository<T extends Entity<T>> {
 	 *
 	 * @param identifier 識別子
 	 * @return エンティティ
-	 * @throws IllegalArgumentException       　引数が不正な場合
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException エンティティが見つからなかった場合
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException     リポジトリにアクセスできない場合
+	 * @throws IllegalArgumentException       引数が不正な場合
+	 * @throws EntityNotFoundRuntimeException エンティティが見つからなかった場合
+	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
 	T resolve(EntityIdentifier<T> identifier);
 	
@@ -110,9 +112,9 @@ public interface Repository<T extends Entity<T>> {
 	 *
 	 * @param predicate 述語
 	 * @return エンティティ
-	 * @throws IllegalArgumentException       　引数が不正な場合
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException エンティティが見つからなかった場合
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException     リポジトリにアクセスできない場合
+	 * @throws IllegalArgumentException       引数が不正な場合
+	 * @throws EntityNotFoundRuntimeException エンティティが見つからなかった場合
+	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
 	T resolve(Predicate<T> predicate);
 	
@@ -120,7 +122,7 @@ public interface Repository<T extends Entity<T>> {
 	 * エンティティを保存する。
 	 *
 	 * @param entity 保存する対象のエンティティ
-	 * @throws jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException リポジトリにアクセスできない場合
+	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
 	 */
 	void store(T entity);
 }
