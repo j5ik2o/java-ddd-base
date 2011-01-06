@@ -52,4 +52,21 @@ public class EntityTest {
 		assertThat(employee.getName(), is(name));
 	}
 	
+	/**
+	 * 属性が異なっても識別子が同じなら等価と判定すること
+	 */
+	@Test
+	public void test02_属性が異なっても識別子が同じなら等価と判定すること() {
+		UUID uuid = UUID.randomUUID();
+		EntityIdentifier<Employee> identifier = DefaultEntityIdentifier.of(Employee.class, uuid);
+		PersonName name1 = PersonName.of("Junichi", "Kato");
+		Employee employee1 = new EmployeeFactory(name1).create(identifier);
+		
+		PersonName name2 = PersonName.of("JUNICHI", "KATO");
+		Employee employee2 = new EmployeeFactory(name2).create(identifier);
+		
+		assertThat(employee1.getName().equals(employee2.getName()), is(false));
+		assertThat(employee1.equals(employee2), is(true));
+	}
+	
 }
