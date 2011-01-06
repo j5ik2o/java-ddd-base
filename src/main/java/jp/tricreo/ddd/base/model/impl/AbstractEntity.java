@@ -21,7 +21,7 @@ import jp.tricreo.ddd.base.model.EntityIdentifier;
 import org.apache.commons.lang.Validate;
 
 /**
- * {@link jp.tricreo.ddd.base.model.Entity}の骨格実装。
+ * {@link Entity}の骨格実装。
  *
  * @param <T> エンティティの型 
  * @author j5ik2o
