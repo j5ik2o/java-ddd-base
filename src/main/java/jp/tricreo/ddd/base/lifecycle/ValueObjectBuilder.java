@@ -100,7 +100,7 @@ public abstract class ValueObjectBuilder<T extends ValueObject, S extends ValueO
 	 *
 	 * <p>
 	 * {@link ValueObjectBuilder#build}内でこのビルダに追加された{@link BuilderConfigurator}を全て実行した後に、このメソッドが呼ばれる。<br>
-	 * その為、このビルダに対する変更を行うロジックはこのメソッド内に記述せず、目的となる{@link jp.tricreo.ddd.base.model.ValueObject}を生成し返すロジックを記述することが望まれる。
+	 * その為、このビルダに対する変更を行うロジックはこのメソッド内に記述せず、目的となる{@link ValueObject}を生成し返すロジックを記述することが望まれる。
 	 * </p>
 	 *
 	 * @return {@link ValueObject}の新しいインスタンス
