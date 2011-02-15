@@ -13,31 +13,30 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package jp.tricreo.ddd.base.model;
+package jp.tricreo.ddd.base.model.impl;
 
-import java.util.UUID;
+import jp.tricreo.ddd.base.model.Identifier;
 
 /**
- * エンティティの識別子を表すバリューオブジェクト。
- *
- * @param <T> エンティティの型
+ * TODO for junichi
+ * 
+ * @version $Id$
  * @author j5ik2o
  */
-public interface EntityIdentifier<T extends Entity<T>> extends ValueObject {
+public class AbstractAggregateRoot extends AbstractEntity {
 	
 	/**
-	 * この識別子の種類(カインド)を取得する。
-	 * <p>通常はエンティティのFQCNが格納されている</p>
-	 *
-	 * @return カインド
+	 * インスタンスを生成する。
+	 * 
+	 * @param identifier 識別子
 	 */
-	String getKind();
+	protected AbstractAggregateRoot(Identifier identifier) {
+		super(identifier);
+	}
 	
-	/**
-	 * この識別子を{@link UUID}に変換する。
-	 *
-	 * @return {@link UUID}
-	 */
-	UUID toUUID();
+	@Override
+	public AbstractAggregateRoot clone() {
+		return (AbstractAggregateRoot) super.clone();
+	}
 	
 }

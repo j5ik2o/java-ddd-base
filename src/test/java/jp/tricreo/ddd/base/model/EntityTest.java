@@ -43,7 +43,7 @@ public class EntityTest {
 	public void test01_エンティティが生成時に指定した属性を保持すること() {
 		UUID uuid = UUID.randomUUID();
 		
-		EntityIdentifier<Employee> identifier = DefaultEntityIdentifier.of(Employee.class, uuid);
+		Identifier identifier = DefaultEntityIdentifier.of(Employee.class, uuid);
 		PersonName name = PersonName.of("Junichi", "Kato");
 		Employee employee = new EmployeeFactory(name).create(identifier);
 		
@@ -58,7 +58,7 @@ public class EntityTest {
 	@Test
 	public void test02_属性が異なっても識別子が同じなら等価と判定すること() {
 		UUID uuid = UUID.randomUUID();
-		EntityIdentifier<Employee> identifier = DefaultEntityIdentifier.of(Employee.class, uuid);
+		Identifier identifier = DefaultEntityIdentifier.of(Employee.class, uuid);
 		PersonName name1 = PersonName.of("Junichi", "Kato");
 		Employee employee1 = new EmployeeFactory(name1).create(identifier);
 		

@@ -26,7 +26,7 @@ import jp.tricreo.ddd.base.lifecycle.Repository;
 import jp.tricreo.ddd.base.lifecycle.exception.EntityMultipleFoundRuntimeException;
 import jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException;
 import jp.tricreo.ddd.base.model.Entity;
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 
 import com.google.common.base.Predicate;
 
@@ -38,25 +38,27 @@ import org.apache.commons.lang.Validate;
  * @param <T> エンティティの型
  * @author j5ik2o
  */
-public class OnMemoryRepository<T extends Entity<T>> implements Repository<T>, Cloneable {
+public class OnMemoryRepository<T extends Entity> implements Repository<T>, Cloneable {
 	
-	private final Map<EntityIdentifier<T>, T> entities = new HashMap<EntityIdentifier<T>, T>();
+	private final Map<Identifier, T> entities = new HashMap<Identifier, T>();
 	
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<T> asEntitiesList() {
 		List<T> result = new ArrayList<T>(entities.size());
 		for (T entity : entities.values()) {
-			result.add(entity.clone());
+			result.add((T) entity.clone());
 		}
 		return result;
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public Set<T> asEntitiesSet() {
 		Set<T> result = new HashSet<T>(entities.size());
 		for (T entity : entities.values()) {
-			result.add(entity.clone());
+			result.add((T) entity.clone());
 		}
 		return result;
 	}
@@ -72,7 +74,7 @@ public class OnMemoryRepository<T extends Entity<T>> implements Repository<T>, C
 	}
 	
 	@Override
-	public boolean contains(EntityIdentifier<T> identifier) {
+	public boolean contains(Identifier identifier) {
 		Validate.notNull(identifier);
 		return entities.containsKey(identifier);
 	}
@@ -95,7 +97,7 @@ public class OnMemoryRepository<T extends Entity<T>> implements Repository<T>, C
 	}
 	
 	@Override
-	public void delete(EntityIdentifier<T> identifier) {
+	public void delete(Identifier identifier) {
 		Validate.notNull(identifier);
 		entities.remove(identifier);
 	}
@@ -107,12 +109,13 @@ public class OnMemoryRepository<T extends Entity<T>> implements Repository<T>, C
 	}
 	
 	@Override
-	public T resolve(EntityIdentifier<T> identifier) {
+	@SuppressWarnings("unchecked")
+	public T resolve(Identifier identifier) {
 		Validate.notNull(identifier);
 		if (contains(identifier) == false) {
 			throw new EntityNotFoundRuntimeException();
 		}
-		return entities.get(identifier).clone();
+		return (T) entities.get(identifier).clone();
 	}
 	
 	@Override
@@ -134,8 +137,9 @@ public class OnMemoryRepository<T extends Entity<T>> implements Repository<T>, C
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public void store(T entity) {
 		Validate.notNull(entity);
-		entities.put(entity.getIdentifier(), entity.clone());
+		entities.put(entity.getIdentifier(), (T) entity.clone());
 	}
 }

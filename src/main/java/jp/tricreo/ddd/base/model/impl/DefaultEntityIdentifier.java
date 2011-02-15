@@ -17,31 +17,29 @@ package jp.tricreo.ddd.base.model.impl;
 
 import java.util.UUID;
 
-import jp.tricreo.ddd.base.model.Entity;
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 
 import org.apache.commons.lang.Validate;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * {@link EntityIdentifier}のデフォルト実装。
+ * {@link Identifier}のデフォルト実装。
  *
- * @param <T> エンティティの型 
  * @author j5ik2o
  */
-public class DefaultEntityIdentifier<T extends Entity<T>> implements EntityIdentifier<T> {
+@SuppressWarnings("serial")
+public class DefaultEntityIdentifier implements Identifier {
 	
 	/**
 	 * ファクトリメソッド。
 	 * 
-	 * @param <E> エンティティの型
 	 * @param entityClass エンティティクラス
 	 * @param uuid {@link UUID}
 	 * @return {@link DefaultEntityIdentifier}
 	 */
-	public static <E extends Entity<E>>DefaultEntityIdentifier<E> of(Class<E> entityClass, UUID uuid) {
-		return new DefaultEntityIdentifier<E>(entityClass, uuid);
+	public static DefaultEntityIdentifier of(Class<?> entityClass, UUID uuid) {
+		return new DefaultEntityIdentifier(entityClass, uuid);
 	}
 	
 
@@ -57,7 +55,7 @@ public class DefaultEntityIdentifier<T extends Entity<T>> implements EntityIdent
 	 * @param entityClass エンティティクラス
 	 * @param uuid        UUID
 	 */
-	public DefaultEntityIdentifier(Class<T> entityClass, UUID uuid) {
+	public DefaultEntityIdentifier(Class<?> entityClass, UUID uuid) {
 		this(entityClass.getName(), uuid);
 	}
 	
@@ -83,8 +81,7 @@ public class DefaultEntityIdentifier<T extends Entity<T>> implements EntityIdent
 		if (o == null || !(o instanceof DefaultEntityIdentifier)) {
 			return false;
 		}
-		@SuppressWarnings("unchecked")
-		DefaultEntityIdentifier<T> that = (DefaultEntityIdentifier<T>) o;
+		DefaultEntityIdentifier that = (DefaultEntityIdentifier) o;
 		return new EqualsBuilder().append(kind, that.kind).append(uuid, that.kind).isEquals();
 	}
 	

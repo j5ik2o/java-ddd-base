@@ -22,7 +22,7 @@ import jp.tricreo.ddd.base.lifecycle.exception.EntityMultipleFoundRuntimeExcepti
 import jp.tricreo.ddd.base.lifecycle.exception.EntityNotFoundRuntimeException;
 import jp.tricreo.ddd.base.lifecycle.exception.RepositoryRuntimeException;
 import jp.tricreo.ddd.base.model.Entity;
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 
 import com.google.common.base.Predicate;
 
@@ -31,7 +31,7 @@ import com.google.common.base.Predicate;
  *
  * @param <T> エンティティの型
  */
-public interface Repository<T extends Entity<T>> {
+public interface Repository<T extends Entity> {
 	
 	/**
 	 * このリポジトリに格納されているすべてのエンティティをListで取得する。
@@ -56,7 +56,7 @@ public interface Repository<T extends Entity<T>> {
 	 * @return 存在する場合はtrue
 	 * @throws RepositoryRuntimeException リポジトリにアクセスできない場合
 	 */
-	boolean contains(EntityIdentifier<T> identifier);
+	boolean contains(Identifier identifier);
 	
 	/**
 	 * 指定した述語が該当するかを返す。
@@ -84,7 +84,7 @@ public interface Repository<T extends Entity<T>> {
 	 * @throws EntityNotFoundRuntimeException 指定された識別子を持つエンティティが見つからなかった場合
 	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
-	void delete(EntityIdentifier<T> identifier);
+	void delete(Identifier identifier);
 	
 	/**
 	 * 指定したエンティティを削除する。
@@ -104,7 +104,7 @@ public interface Repository<T extends Entity<T>> {
 	 * @throws EntityNotFoundRuntimeException エンティティが見つからなかった場合
 	 * @throws RepositoryRuntimeException     リポジトリにアクセスできない場合
 	 */
-	T resolve(EntityIdentifier<T> identifier);
+	T resolve(Identifier identifier);
 	
 	/**
 	 * 述語に該当するエンティティを取得する。

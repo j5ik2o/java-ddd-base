@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.UUID;
 
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 import jp.tricreo.ddd.base.model.impl.DefaultEntityIdentifier;
 
 import com.google.common.base.Predicate;
@@ -42,11 +42,16 @@ public class OnMemoryRepositoryTest {
 	
 	private OnMemoryRepository<Employee> repository = new OnMemoryRepository<Employee>();
 	
-	private EntityIdentifier<Employee> identifier;
+	private Identifier identifier;
 	
 	private Employee employee;
 	
 
+	/**
+	 * TODO for junichi
+	 * 
+	 * @since TODO
+	 */
 	@Before
 	public void setUp() {
 		UUID uuid = UUID.randomUUID();

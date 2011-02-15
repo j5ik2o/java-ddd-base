@@ -18,17 +18,16 @@ package jp.tricreo.ddd.base.model;
 /**
  * エンティティを表すインターフェイス。
  *
- * @param <T> エンティティの型 
  * @author j5ik2o
  */
-public interface Entity<T extends Entity<T>> extends Cloneable {
+public interface Entity extends DomainModel, Cloneable {
 	
 	/**
-	 * このエンティティの複製を生成する。
+	 * このエンティティが複製されたインスタンスを返す。
 	 * 
-	 * @return このエンティティの複製。
+	 * @return 複製されたインスタンス
 	 */
-	T clone();
+	Entity clone();
 	
 	/**
 	 * エンティティの{@link #getIdentifier() 識別子}を用いて、このエンティティの同一性を比較する。
@@ -42,9 +41,9 @@ public interface Entity<T extends Entity<T>> extends Cloneable {
 	/**
 	 * エンティティの識別子を取得する。
 	 * 
-	 * @return {@link EntityIdentifier}
+	 * @return {@link Identifier}
 	 */
-	EntityIdentifier<T> getIdentifier();
+	Identifier getIdentifier();
 	
 	/**
 	 * このエンティティのハッシュコードを返す。

@@ -15,7 +15,7 @@
  */
 package sample;
 
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 import jp.tricreo.ddd.base.model.impl.AbstractEntity;
 
 /**
@@ -23,7 +23,7 @@ import jp.tricreo.ddd.base.model.impl.AbstractEntity;
  * 
  * @author j5ik2o
  */
-public final class Employee extends AbstractEntity<Employee> {
+public final class Employee extends AbstractEntity {
 	
 	private PersonName name;
 	
@@ -31,10 +31,10 @@ public final class Employee extends AbstractEntity<Employee> {
 	/**
 	 * インスタンスを生成する。
 	 * 
-	 * @param identifier {@link EntityIdentifier}
+	 * @param identifier {@link Identifier}
 	 * @param name {@link PersonName}
 	 */
-	public Employee(EntityIdentifier<Employee> identifier, PersonName name) {
+	public Employee(Identifier identifier, PersonName name) {
 		super(identifier);
 		this.name = name;
 	}

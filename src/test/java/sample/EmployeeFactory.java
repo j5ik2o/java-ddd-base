@@ -18,7 +18,7 @@ package sample;
 import java.util.UUID;
 
 import jp.tricreo.ddd.base.lifecycle.EntityFactory;
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 import jp.tricreo.ddd.base.model.impl.DefaultEntityIdentifier;
 
 /**
@@ -42,12 +42,12 @@ public class EmployeeFactory implements EntityFactory<Employee> {
 	
 	@Override
 	public Employee create() {
-		EntityIdentifier<Employee> identifier = DefaultEntityIdentifier.of(Employee.class, UUID.randomUUID());
+		Identifier identifier = DefaultEntityIdentifier.of(Employee.class, UUID.randomUUID());
 		return create(identifier);
 	}
 	
 	@Override
-	public Employee create(EntityIdentifier<Employee> identifier) {
+	public Employee create(Identifier identifier) {
 		return new Employee(identifier, name);
 	}
 }

@@ -16,43 +16,40 @@
 package jp.tricreo.ddd.base.model.impl;
 
 import jp.tricreo.ddd.base.model.Entity;
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 
 import org.apache.commons.lang.Validate;
 
 /**
  * {@link Entity}の骨格実装。
  *
- * @param <T> エンティティの型 
  * @author j5ik2o
  */
-public abstract class AbstractEntity<T extends Entity<T>> implements Entity<T> {
+public abstract class AbstractEntity implements Entity {
 	
-	private final EntityIdentifier<T> identifier;
+	private final Identifier identifier;
 	
 
 	/**
 	 * インスタンスを生成する。
 	 *
-	 * @param identifier {@link EntityIdentifier}
+	 * @param identifier {@link Identifier}
 	 */
-	protected AbstractEntity(EntityIdentifier<T> identifier) {
+	protected AbstractEntity(Identifier identifier) {
 		Validate.notNull(identifier);
 		this.identifier = identifier;
 	}
 	
 	@Override
-	@SuppressWarnings("unchecked")
-	public T clone() {
+	public AbstractEntity clone() {
 		try {
-			return (T) super.clone();
+			return (AbstractEntity) super.clone();
 		} catch (CloneNotSupportedException e) {
 			throw new Error("clone not supported");
 		}
 	}
 	
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean equals(Object that) {
 		if (this == that) {
 			return true;
@@ -60,11 +57,11 @@ public abstract class AbstractEntity<T extends Entity<T>> implements Entity<T> {
 		if (that == null || that instanceof Entity == false) {
 			return false;
 		}
-		return identifier.equals(((T) that).getIdentifier());
+		return identifier.equals(((AbstractEntity) that).getIdentifier());
 	}
 	
 	@Override
-	public EntityIdentifier<T> getIdentifier() {
+	public Identifier getIdentifier() {
 		return identifier;
 	}
 	

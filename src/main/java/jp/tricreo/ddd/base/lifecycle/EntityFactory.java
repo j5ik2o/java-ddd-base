@@ -16,7 +16,7 @@
 package jp.tricreo.ddd.base.lifecycle;
 
 import jp.tricreo.ddd.base.model.Entity;
-import jp.tricreo.ddd.base.model.EntityIdentifier;
+import jp.tricreo.ddd.base.model.Identifier;
 
 /**
  * {@link Entity}のためのファクトリ。
@@ -24,7 +24,7 @@ import jp.tricreo.ddd.base.model.EntityIdentifier;
  * @param <T> エンティティの型 
  * @author j5ik2o
  */
-public interface EntityFactory<T extends Entity<T>> {
+public interface EntityFactory<T extends Entity> {
 	
 	/**
 	 * ファクトリの状態に基づいて {@link Entity}のインスタンスを生成する。
@@ -41,6 +41,6 @@ public interface EntityFactory<T extends Entity<T>> {
 	 * @return 新しい {@link Entity}のインスタンス
 	 * @throws IllegalArgumentException 引数{@code identifier}に{@code null}を与えた場合
 	 */
-	T create(EntityIdentifier<T> identifier);
+	T create(Identifier identifier);
 	
 }
